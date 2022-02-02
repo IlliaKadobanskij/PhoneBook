@@ -1,12 +1,15 @@
-from django.core.files.storage import FileSystemStorage
+from model_utils import Choices
 from django.db import models
 
 
 class CommunicationMethod(models.Model):
-    communication_name = models.CharField(max_length=30)
+    NAME = Choices("phone", "telegram", "skype", "email")
+    name = models.CharField(choices=NAME, default=NAME.phone, max_length=20)
+
+    info = models.CharField(max_length=30, null=True)
 
     def __str__(self):
-        return f"{self.communication_name}"
+        return f"{self.name}"
 
     class Meta:
         verbose_name = "Communication method"
@@ -15,7 +18,6 @@ class CommunicationMethod(models.Model):
 
 class Profile(models.Model):
     contact_name = models.CharField(max_length=30)
-    phone_number = models.CharField(max_length=15)
     avatar = models.ImageField()
     communication_method = models.ManyToManyField(CommunicationMethod, blank=True)
 

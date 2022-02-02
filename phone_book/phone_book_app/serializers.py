@@ -1,19 +1,39 @@
+import re
 from rest_framework import serializers
-
 from phone_book_app.models import Profile, CommunicationMethod
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ["id", "contact_name", "phone_number", "avatar", "communication_method"]
+        fields = ["id", "contact_name", "avatar", "communication_method"]
 
-        def validate(self, data):
-            if len(data["contact_name"]) < 4:
-                raise serializers.ValidationError("Contact name must contain more than 4 characters")
+    def validate_contact_name(self, contact_name):
+        if len(contact_name) < 4:
+            raise serializers.ValidationError("Contact name must contain more than 4 characters")
 
 
 class CommunicationMethodSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunicationMethod
-        fields = ["id", "communication_name"]
+        fields = ["id", "name", "info"]
+
+    def validate(self, data):
+        print(".!.")
+        if data["name"] == "phone":
+            if not re.match(r"^[+][0-9]{1,12}$", data["info"]):
+                raise serializers.ValidationError("Phone number is not valid")
+
+        elif data["name"] == "telegram":
+            if not re.match(r"^@+[a-zA-Z1-9_]*$", data["info"]):
+                raise serializers.ValidationError("Telegram username is not valid")
+
+        elif data["name"] == "skype":
+            if not re.match(r"^live:+[a-zA-Z1-9_]*$", data["info"]):
+                raise serializers.ValidationError("Skype username is not valid")
+
+        elif data["name"] == "email":
+            if not re.match(r"^[\w]+@([\w-]+\.)+[\w-]{2,4}$", data["info"]):
+                raise serializers.ValidationError("Email address is not valid")
+
+        return data
