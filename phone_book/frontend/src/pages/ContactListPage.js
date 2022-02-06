@@ -1,4 +1,9 @@
 import React, {useState, useEffect} from "react";
+import ListContact from "../components/ListContact";
+
+import Box from '@mui/material/Box';
+
+
 
 const ContactsListPage = () => {
 
@@ -10,22 +15,17 @@ const ContactsListPage = () => {
 
     let getContacts = async () => {
 
-        let response = await fetch('http://127.0.0.1:8000/api/profiles/')
+        let response = await fetch('/api/profiles/')
         let data = await response.json()
         setContacts(data)
     }
 
     return (
-        <div>
-            <div className="contacts-list">
-                {contacts.map((contact, index) => (
-                    <div>
-                        <h3>{contact.contact_name}</h3>
-                        <h3>{contact.communication_method[0].name}</h3>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <Box sx={{flexGrow: 1, overflow: 'hidden', px: 3}}>
+            {contacts.map((contact, index) => (
+                <ListContact key={index} contact={contact}/>
+            ))}
+        </Box>
     )
 
 }

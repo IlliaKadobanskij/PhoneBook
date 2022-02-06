@@ -6,7 +6,7 @@ from phone_book_app.models import Profile, CommunicationMethod
 class CommunicationMethodSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommunicationMethod
-        fields = ["id", "name", "info"]
+        fields = ["id", "profile", "name", "info"]
 
     def validate(self, data):
         if data["name"] == "phone":
@@ -29,8 +29,8 @@ class CommunicationMethodSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    communication_method = CommunicationMethodSerializer(many=True, read_only=True)
+    communication_methods = CommunicationMethodSerializer(many=True, read_only=True)
 
     class Meta:
         model = Profile
-        fields = ["id", "contact_name", "avatar", "communication_method"]
+        fields = ["id", "communication_methods", "contact_name", "avatar"]
