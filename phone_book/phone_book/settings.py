@@ -30,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +43,14 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
+    ]
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -76,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "phone_book.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -88,7 +94,7 @@ DATABASES = {
         "PASSWORD": "1234",
         "HOST": "localhost",
         "POST": "",
-    }
+    },
 }
 
 # Password validation
@@ -109,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -120,7 +125,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -133,3 +137,10 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# defaults to default local mongodb server
+DEFAULT_GRIDFS_URL = "mongodb://127.0.0.1:27017"
+# if set to None, it will refuse to serve files and raise an Exception
+DEFAULT_GRIDFS_SERVE_URL = None
+DEFAULT_GRIDFS_COLLECTION = "phone_book"
+DEFAULT_FILE_STORAGE = "gridfs_storage.storage.GridFSStorage"

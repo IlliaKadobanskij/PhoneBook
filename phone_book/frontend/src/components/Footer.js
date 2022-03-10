@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import {Link} from "react-router-dom";
 
 
 const StyledFab = styled(Fab)({
@@ -38,9 +39,11 @@ function Footer() {
                 <IconButton color="inherit" aria-label="open drawer">
                     <MenuIcon/>
                 </IconButton>
-                <StyledFab color="secondary" aria-label="add">
-                    <AddIcon/>
-                </StyledFab>
+                <Link to={'/new_contact'}>
+                    <StyledFab color="secondary" aria-label="add">
+                        <AddIcon/>
+                    </StyledFab>
+                </Link>
                 <Box sx={{flexGrow: 1}}/>
                 <IconButton color="inherit">
                     <SearchIcon/>

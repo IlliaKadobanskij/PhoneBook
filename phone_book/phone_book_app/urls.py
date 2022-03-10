@@ -1,6 +1,5 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-
 from phone_book_app.views import ProfileViewSet, CommunicationMethodViewSet
 
 router = DefaultRouter()
