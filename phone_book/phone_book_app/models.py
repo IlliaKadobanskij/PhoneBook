@@ -9,7 +9,10 @@ class Profile(models.Model):
     avatar = models.ImageField(storage=GridFSStorage(base_url="/"), blank=True, null=True)
 
     def get_base64_image(self):
-        return str(base64.b64encode(self.avatar.read()).decode())
+        if self.avatar:
+            return str(base64.b64encode(self.avatar.read()).decode())
+        else:
+            return ""
 
     def __str__(self):
         return f"{self.contact_name}"

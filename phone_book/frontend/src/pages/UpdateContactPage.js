@@ -1,12 +1,14 @@
+import React from "react";
 import Footer from "../components/Footer/Footer";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+
 import Header from "../components/Header/Header";
-import NewContactForm from "../components/NewContactForm/NewContactForm";
+import UpdateContactForm from "../components/UpdateContactForm/UpdateContactForm";
 
 
+const UpdateContactPage = () => {
 
-const NewContactPage = () => {
 
     return (
         <Box sx={{
@@ -23,11 +25,11 @@ const NewContactPage = () => {
                 margin: "130px 30px 0 30px",
                 height: "700px"
             }}>
-                <NewContactForm />
+                <UpdateContactForm />
             </Paper>
             <Footer/>
         </Box>
     )
 }
 
-export default NewContactPage
+export default UpdateContactPage
