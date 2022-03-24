@@ -75,3 +75,12 @@ In separate terminal:
 
 ---
 
+## Step 7
+
+Run tests with following command:
+
+```
+   cd phone_book
+   python manage.py test phone_book_app.tests
+```
+---
